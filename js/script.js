@@ -109,3 +109,9 @@ const checkIfWin = function () {
     message.innerHTML = `<p class="highlight">You guessed the correct word! Congrats!</p>`;
   }
 };
+const startOver = function () {
+  guessLetterButton.classList.add("hide");
+  remainingGuessesElement.classList.add("hide");
+  guessedLettersElement.classList.add("hide");
+  playAgainButton.classList.remove("hide");
+};
