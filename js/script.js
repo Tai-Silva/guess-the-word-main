@@ -16,6 +16,7 @@ const placeholder = function (word) {
     for (const letter of word) {
       console.log(letter);
       placeholderLetters.push("●");
+      placeholderLetters.push("●");
     }
     wordInProgress.innerText = placeholderLetters.join("");
   };
@@ -27,4 +28,37 @@ const placeholder = function (word) {
     const guess = letterInput.value;
     console.log(guess);
     letterInput.value = "";
+    
+    if (goodGuess) {
+      // We've got a letter! Let's guess!
+      makeGuess(guess);
+    }
+    letterInput.value = "";
   });
+
+  const validateInput = function (input) {
+    const acceptedLetter = /[a-zA-Z]/;
+    if (input.length === 0) {
+      // Is the input empty?
+      message.innerText = "Please enter a letter.";
+    } else if (input.length > 1) {
+      // Did you type more than one letter?
+      message.innerText = "Please enter a single letter.";
+    } else if (!input.match(acceptedLetter)) {
+      // Did you type a number, a special character or some other non letter thing?
+      message.innerText = "Please enter a letter from A to Z.";
+    } else {
+      // We finally got a single letter, omg yay
+      return input;
+    }
+  };
+
+  const makeGuess = function (guess) {
+    guess = guess.toUpperCase();
+    if (guessedLetters.includes(guess)) {
+      message.innerText = "You already guessed that letter, silly. Try again.";
+    } else {
+      guessedLetters.push(guess);
+      console.log(guessedLetters);
+    }
+  };
